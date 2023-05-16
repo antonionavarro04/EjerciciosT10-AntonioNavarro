@@ -1,4 +1,4 @@
-package ejercicios.ejercicio1;
+package excepciones.ejercicio1;
 
 import java.util.Locale;
 import java.util.Scanner;

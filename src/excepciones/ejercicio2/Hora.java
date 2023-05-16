@@ -1,4 +1,4 @@
-package ejercicios.ejercicio2;
+package excepciones.ejercicio2;
 
 /**
  * Clase que crea una Hora, con todos los atributos, métodos y constructores necesarios para su correcto funcionamiento
@@ -84,16 +84,9 @@ public class Hora {
     /**
      * Devuelve el minuto
      * @return Minuto
-     * @throws NegativeMinuteException si el minuto es negativo
      */
-    public int getMinuto() throws NegativeMinuteException {
-        if (minuto > 59) {
-            System.err.println("El minuto como máximo puede ser 59");
-        } else if (minuto < 0) {
-            throw new NegativeMinuteException();
-        } else {
-            return this.minuto;
-        } return 0;
+    public int getMinuto() {
+        return this.minuto;
     }
 
     /**

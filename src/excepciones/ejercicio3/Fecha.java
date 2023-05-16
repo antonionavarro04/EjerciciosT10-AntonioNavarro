@@ -1,4 +1,4 @@
-package ejercicios.ejercicio3;
+package excepciones.ejercicio3;
 
 /**
  * Clase que crea una Fecha, con todos los atributos, métodos y constructores necesarios para su correcto funcionamiento
@@ -9,17 +9,17 @@ public class Fecha {
     /**
      * Día de la Fecha
      */
-    private int dia;
+    private int dia = 1;
 
     /**
      * Mes de la Fecha
      */
-    private int mes;
+    private int mes = 1;
 
     /**
      * Año de la Fecha
      */
-    private int año;
+    private int año = 0;
 
     /**
      * Constructor por Defecto
@@ -33,6 +33,8 @@ public class Fecha {
      * @param dia Día de la Fecha
      * @param mes Mes de la Fecha
      * @param año Año de la Fecha
+     * @throws NegativeMonthException
+     * @throws NegativeDayException
      */
     public Fecha (int dia, int mes, int año) throws NegativeMonthException, NegativeDayException {
         // ^ Definimos una variable booleana de control para saber si hay fallos en el dia
@@ -110,10 +112,15 @@ public class Fecha {
 
     /**
      * Establece el día de la Fecha
-     * @param dia Día de la Fecha TODO Implemntar Excepcuiones en SET
+     * @param dia Día de la Fecha
+     * @throws NegativeDayException
      */
-    public void setDia(int dia) {
-        this.dia = dia;
+    public void setDia(int dia) throws NegativeDayException {
+        if (dia < 1) {
+            throw new NegativeDayException();
+        } else {
+            this.dia = dia;
+        }
     }
 
     /**
@@ -127,9 +134,14 @@ public class Fecha {
     /**
      * Establece el mes de la Fecha
      * @param mes Mes de la Fecha
+     * @throws NegativeMonthException
      */
-    public void setMes(int mes) {
-        this.mes = mes;
+    public void setMes(int mes) throws NegativeMonthException {
+        if (mes < 1) {
+            throw new NegativeMonthException();
+        } else {
+            this.mes = mes;
+        }
     }
 
     /**

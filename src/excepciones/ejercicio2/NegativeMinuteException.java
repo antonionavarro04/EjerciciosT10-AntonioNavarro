@@ -1,4 +1,4 @@
-package ejercicios.ejercicio2;
+package excepciones.ejercicio2;
 
 public class NegativeMinuteException extends Exception {
     @Override
