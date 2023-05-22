@@ -1,0 +1,3 @@
+juan 22 1.78
+amalia 20 1.60
+javier 12 1.30
