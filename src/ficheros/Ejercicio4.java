@@ -8,7 +8,7 @@ import java.io.File;
 
 public class Ejercicio4 {
     private static final String DIR = "out\\ejercicio4";
-    private static final String ROUTE = "out\\ejercicio4\\Teclado.txt";
+    private static final String ROUTE = DIR + "\\Teclado.txt";
 
     public static void main(String[] args) {
         // ? Creamos el directorio si no existe
