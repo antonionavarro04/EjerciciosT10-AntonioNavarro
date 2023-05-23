@@ -7,7 +7,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Ejercicio3 {
-    private static final String ROUTE = "in\\ejercicio3\\Alumnos.ssv"; // ? Space Separated Values
+    private static final String ROUTE = "in\\ejercicio3\\Alumnos.txt"; // ? Space Separated Values
 
     public static void main(String[] args) {
         // ^ Definimos una instancia de Scanner
