@@ -47,9 +47,12 @@ public class Ejercicio5 {
         // ^ Cerramos el Scanner
         read.close();
 
+        // ^ Definimos un BuffereWriter a null
+        BufferedWriter bw = null;
+
         try {
             // ^ Creamos el BufferedWriter
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
+            bw = new BufferedWriter(new FileWriter(file, true));
 
             // ^ Escribimos la información
             for (int pos = 0; pos < datos.length; pos++) {
@@ -59,12 +62,15 @@ public class Ejercicio5 {
                     bw.write(" ");
                 }
             } bw.newLine(); // ? Agregamos un salto de línea
-            bw.flush(); // ? Forzamos la escritura de los datos
-            bw.close(); // ^ Cerramos el BufferedWriter
         } catch (IOException e) {
             System.err.printf("Ha ocurrido un error en el fichero de ruta \"%s\"\n", ROUTE);
         } finally {
-            System.out.printf("La información ha sido escrita en el fichero ha sido escrito correctamente\n");
+            try {
+                bw.flush();
+                bw.close();
+            } catch (IOException e) {
+                System.err.printf("Ha ocurrido un error al cerrar el fichero de ruta \"%s\"\n", ROUTE);
+            }
         }
     }
 }
