@@ -1,10 +1,11 @@
 package ficheros;
 
-import java.util.Locale;
-import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.File;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class Ejercicio4 {
     private static final String DIR = "out\\ejercicio4";
@@ -36,13 +37,22 @@ public class Ejercicio4 {
         // ^ Definimos un boolean para indicar que ha acabado
         boolean end = false;
 
-        // ! Borramos el contenido del fichero
+        // ^ Definimos un BufferedWriter a null
+        BufferedWriter bw = null;
+
+        // ! Limpiamos el fichero
         try {
-            FileWriter fw = new FileWriter(ROUTE);
-            fw.write("");
-            fw.close();
+            bw = new BufferedWriter(new FileWriter(ROUTE));
+            bw.write("");
         } catch (IOException e) {
-            System.err.printf("El archivo en la ruta \"%s\" no ha sido encontrado...\n", ROUTE);
+            System.err.printf("Ha ocurrido un error al limpiar el archivo, ruta: \"%s\"\n", ROUTE);
+        } finally {
+            try {
+                bw.flush();
+                bw.close();
+            } catch (IOException e) {
+                System.err.printf("Ha ocurrido un error al cerrar el archivo, ruta: \"%s\"\n", ROUTE);
+            }
         }
 
         while (!end) { // ? Leeremos datos de teclado hasta que el usuario introduzca la cadena "fin" en todas sus variantes
@@ -55,13 +65,18 @@ public class Ejercicio4 {
                 end = true;
             } else { // ? Si no, metemos la cadena en el fichero contenido en la variable global ROUTE
                 try {
-                    FileWriter fw = new FileWriter(ROUTE, true);
-                    fw.write(cadena + "\n");
-                    fw.close();
+                    bw = new BufferedWriter(new FileWriter(ROUTE, true));
+                    bw.write(cadena);
+                    bw.newLine();
                 } catch (IOException e) { // ? Si no se encuentra el fichero, mostramos un mensaje por pantalla
                     System.err.printf("El archivo en la ruta \"%s\" no ha sido encontrado...\n", ROUTE);
                 } finally { // ? Si todo ha ido bien, mostramos un mensaje por pantalla
-                    System.out.printf("La cadena \"%s\" ha sido escrita en el fichero \"%s\"\n", cadena, ROUTE);
+                    try {
+                        bw.flush();
+                        bw.close();
+                    } catch (IOException e) {
+                        System.err.printf("Ha ocurrido un error al cerrar el archivo, ruta: \"%s\"\n", ROUTE);
+                    }
                 }
             } System.out.println(); // ? Salto de linea
         }
