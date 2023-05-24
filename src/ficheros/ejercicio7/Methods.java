@@ -46,9 +46,7 @@ public class Methods {
                 s +=
                 "\"" + entry.getKey() + "\" -> " + entry.getValue() + "\n"
                 ;
-            }   
-        }
-
-        return s;
+            }
+        } return s;
     }
 }
