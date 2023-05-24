@@ -59,6 +59,7 @@ public class Ejercicio5 {
                     bw.write(" ");
                 }
             } bw.newLine(); // ? Agregamos un salto de línea
+            bw.flush(); // ? Forzamos la escritura de los datos
             bw.close(); // ^ Cerramos el BufferedWriter
         } catch (IOException e) {
             System.err.printf("Ha ocurrido un error en el fichero de ruta \"%s\"\n", ROUTE);
