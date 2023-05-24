@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
@@ -80,8 +79,8 @@ public class Main {
                 try { // ? Intentamos leer un Character
                     System.out.print(Methods.menu());
                     option = read.nextLine().charAt(0);
-                } catch (InputMismatchException e) { // ? Si se introduce una cadena vacía lanzamos un mensaje de error
-                    System.err.printf("La opción '%s' no es válida\n", option);
+                } catch (StringIndexOutOfBoundsException e) { // ? Si se introduce una cadena vacía lanzamos un mensaje de error
+                    System.err.printf("Se ha introducido una cadena no válida\n");
                     option = '0';
                 } finally {
                     System.out.println(); // ? Salto de Línea
@@ -121,6 +120,7 @@ public class Main {
                         break;
                         
                     default:
+                        System.err.printf("La opción \"%s\" no es válida\n", option);
                         continue;
                 } if (option != SALIR) {
                     System.out.println("Pulsa 'enter' para continuar...");
