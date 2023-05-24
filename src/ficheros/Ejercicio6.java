@@ -24,33 +24,42 @@ public class Ejercicio6 {
 
     public static void main(String[] args) {
         // ? Creamos el directorio de salida y entrada si no existe
-        if (!new File(OUT_DIR).exists()) {
+        File file = new File(OUT_DIR);
+        if (!file.exists()) {
             System.out.printf("La ruta \"%s\" no existía y a sido creada\n", OUT_DIR);
-            new File(OUT_DIR).mkdirs();
-        } if (!new File(IN_DIR).exists()) {
+            file.mkdirs();
+        }
+
+        file = new File(IN_DIR);
+        if (!file.exists()) {
             System.out.printf("La ruta \"%s\" no existía y a sido creada\n", IN_DIR);
-            new File(IN_DIR).mkdirs();
+            file.mkdirs();
         }
 
         // ? Creamos el fichero de salida y entrada si no existe
-        if (!new File(OUT_ROUTE).exists()) {
+        file = new File(OUT_ROUTE);
+        if (!file.exists()) {
             try {
                 System.out.printf("El fichero \"%s\" no existía y a sido creado\n", OUT_FILE);
-                new File(OUT_ROUTE).createNewFile();
-            } catch (Exception e) {
+                file.createNewFile();
+            } catch (IOException e) {
                 System.err.printf("Ha ocurrido un error al crear el archivo, ruta: \"%s\"\n", OUT_ROUTE);
-            }
-        } if (!new File(IN_ROUTE).exists()) {
-            try {
-                System.out.printf("El fichero \"%s\" no existía y a sido creado\n", IN_FILE);
-                new File(IN_ROUTE).createNewFile();
-            } catch (Exception e) {
-                System.err.printf("Ha ocurrido un error al crear el archivo, ruta: \"%s\"\n", IN_ROUTE);
             }
         }
 
-        // ^ Definimos un Scanner
+        file = new File(IN_ROUTE);
+        if (!file.exists()) {
+            try {
+                System.out.printf("El fichero \"%s\" no existía y a sido creado\n", IN_FILE);
+                file.createNewFile();
+            } catch (IOException e) {
+                System.err.printf("Ha ocurrido un error al crear el archivo, ruta: \"%s\"\n", IN_ROUTE);
+            }
+        }
+        
+        // ^ Definimos un Scanner y un BufferedWriter a null
         Scanner sc = null;
+        BufferedWriter bw = null;
 
         // ^ Definimos un ArrayList de Enteros
         ArrayList<Integer> numeros = new ArrayList<Integer>();
@@ -68,11 +77,8 @@ public class Ejercicio6 {
             sc.close();
         }
 
-        // ^ Ordenamos el ArrayList
+        // ^ Ordenamos el Array
         numeros.sort(null);
-
-        // ^ Definimos un BufferedWriter
-        BufferedWriter bw = null;
 
         // ! Escribimos el array ordenado en el fichero
         try {
