@@ -9,7 +9,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Scanner;
+
+// ? Para este caso en concreto lo mas Adecuado es usar un Map, ya que necesitamos pares clave valor siendo Nombre-Numero. Dentro de los mapas el mas adecuado es el TreeMap, ya que nos ordena los datos por clave, aunque cualquier otro serviría.
 import java.util.TreeMap;
 
 
@@ -38,18 +41,8 @@ public class Main {
             try {
                 file.createNewFile();
                 System.out.printf("Se ha creado el fichero \"%s\"\n", ROUTE);
-                bw = new BufferedWriter(new FileWriter(file));
-                bw.write("Nombre,Numero"); // ! Escribimos la cabecera del csv
-                bw.newLine();
             } catch (IOException e) {
                 System.err.printf("Ha ocurrido un error al crear el archivo, ruta: \"%s\"\n", ROUTE);
-            } finally { // * Cerramos el BufferedWriter
-                try {
-                    bw.flush();
-                    bw.close();
-                } catch (IOException e) {
-                    System.err.printf("Ha ocurrido un error al cerrar el archivo, ruta: \"%s\"", ROUTE);
-                }
             }
         }
 
@@ -113,7 +106,10 @@ public class Main {
                         break;
                 
                     case '2':
-                        // TODO | Methods.searchContact(cadena);
+                        System.out.print("Introduce el Nombre: ");
+                        cadena = read.nextLine();
+
+                        System.out.println(Methods.searchContact(cadena));
                         break;
     
                     case '3':
@@ -133,7 +129,36 @@ public class Main {
             }
         } while (option != SALIR);
 
-        // TODO | SAVE DATA
+        try {
+            // ! Abrimos el Archivo en modo Write
+            bw = new BufferedWriter(new FileWriter(file, false));
+
+            // ! Vaciamos el Archivo y escribimos la cabecera de CSV
+            bw.write("Nombre,Telefono");
+            bw.newLine();
+            bw.flush();
+            bw.close();
+
+            // ! Abrimos el Archivo en modo Append
+            bw = new BufferedWriter(new FileWriter(file, true));
+
+            // ! Recorremos los valores del Array y los escribimos en el Archivo
+            for (Map.Entry<String, Integer> entry : agenda.entrySet()) {
+                bw.write(entry.getKey() + "," + entry.getValue().toString());
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.err.printf("Ha ocurrido un error al guardar los datos, ruta: \"%s\"\n", ROUTE);
+        } finally {
+            if (bw != null) {
+                try {
+                    bw.flush();
+                    bw.close();
+                } catch (IOException e) {
+                    System.err.printf("Ha ocurrido un error al cerrar el archivo, ruta: \"%s\"\n", ROUTE);
+                }
+            }
+        }
 
         // ^ Cerramos el Scanner
         read.close();

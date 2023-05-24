@@ -28,13 +28,25 @@ public class Methods {
         } return state;
     }
 
+    public static String searchContact(String n) {
+        String s = "El contacto no ha sido Encontrado...";
+
+        if (Main.agenda.containsKey(n)) {
+            s = "\"" + n + "\" -> " + Main.agenda.get(n);
+        } return s;
+    }
+
     public static String printContact() {
         String s = "";
 
-        for (Map.Entry<String, Integer> entry : Main.agenda.entrySet()) {
-            s +=
-            "\"" + entry.getKey() + "\" -> " + entry.getValue() + "\n"
-            ;
+        if (Main.agenda.isEmpty()) {
+            s = "La Agenda está vacía...";
+        } else {
+            for (Map.Entry<String, Integer> entry : Main.agenda.entrySet()) {
+                s +=
+                "\"" + entry.getKey() + "\" -> " + entry.getValue() + "\n"
+                ;
+            }   
         }
 
         return s;
