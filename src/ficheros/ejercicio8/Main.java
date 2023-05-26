@@ -128,7 +128,10 @@ public class Main {
                             state2 = false;
                         } while (n > 12 || n < 1);
                         state2 = true;
-                        cadena += String.valueOf(n) + "-";
+
+                        if (n % 10 == 0) { // ? Si solo tiene una cifra
+                            cadena += "0";
+                        } cadena += String.valueOf(n) + "-";
 
                         do { // ? Comprobamos que el día sea menor o igual a 31 y mayor que 0
                             if (!state2) {
@@ -137,7 +140,9 @@ public class Main {
                             n = read.nextInt(); read.nextLine();
                             state2 = false;
                         } while (n > 31 || n < 1);
-                        cadena += String.valueOf(n);
+                        if (n % 10 == 0) { // ? Si solo tiene una cifra
+                            cadena += "0";
+                        } cadena += String.valueOf(n);
                         
                         if (state) { // ? Si es la primera vez cogemos las temperaturas
                             System.out.print("Introduce la Temperatura Máxima: ");
@@ -150,6 +155,10 @@ public class Main {
                         state = Methods.newTemperature(cadena, temperaturas);
                     } while (!state);
                 break;
+            }
+            
+            if () { // ? Si la opción es diferente a SALIR 
+
             }
         } while (option != SALIR);
 
